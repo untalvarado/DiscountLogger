@@ -1,0 +1,33 @@
+<?xml version="1.0"?> 
+<!--La estructura del XML fue generado por IA la parametrizacon de cada argumento por Jorge Alvarado -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Vendor\DiscountLogger\Model\Log\Handler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+		 <argument name="fileName" xsi:type="string">
+			var/log/custom_discount.log
+		</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Vendor\DiscountLogger\Model\Log\Logger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+		<argument name="handlers" xsi:type="array">
+			<item name="custom" xsi:type="object">
+				Vendor\DiscountLogger\Model\Log\Handler
+			</item>
+		</argument> 
+	</arguments> 
+    </virtualType> 
+	<type name="Vendor\DiscountLogger\Plugin\LogDiscountCoupon">
+		<arguments> 
+			<argument name="logger" xsi:type="object">
+				Vendor\DiscountLogger\Model\Log\Logger
+			</argument>
+			<argument name="targetCouponCode" xsi:type="string">
+				SAVE10
+			</argument>
+        	</arguments> 
+	</type> 
+	<type name="Magento\Quote\Model\Quote"> 
+        	<plugin name="vendor_discountlogger_quote_save" type="Vendor\DiscountLogger\Plugin\LogDiscountCoupon" sortOrder="10" disabled="false"/>
+    	</type>
+</config>
