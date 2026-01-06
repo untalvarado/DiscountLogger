@@ -1,0 +1,6 @@
+type Customer { 
+	loyalty_points: Int 
+	@doc(description: "Puntos de lealtad simulados basados en el ID del cliente") 
+	@resolver(class: 
+	"Vendor\\DiscountLogger\\Model\\Resolver\\LoyaltyPoints")
+}

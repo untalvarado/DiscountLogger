@@ -43,6 +43,7 @@ class LogDiscountCoupon
 	        // Requerimiento estricto: Solo si el cupon es EXACTAMENTE "SAVE10"
         	$couponCode = $subject->getCouponCode();
 		$foundCouponCode= $this->targetCouponCode;
+
         	if ($couponCode === $foundCouponCode) {
 	            // Se calcula los montos requeridos
         	    $subtotal = $subject->getSubtotal();
